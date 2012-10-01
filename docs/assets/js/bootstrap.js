@@ -754,9 +754,14 @@
   var shownModals = [];
 
   var Modal = function (element, options) {
+    var prox = $.proxy(this.hide, this);
     this.options = options
+    this.$element = $(element);
     this.$element = $(element)
-      .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
+      .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', function(e) { 
+          console.log(e.target);
+          if ($(e.target).parents('.modal')[0] == element) prox(e); 
+      });
     this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
   }
 
@@ -814,8 +819,8 @@
       }
 
     , hide: function (e) {
-        e && e.preventDefault()
-
+        e && e.preventDefault() && e.stopPropagation() 
+        //e && e.stopImmediatePropagation()
         var that = this
 
         e = $.Event('hide')
