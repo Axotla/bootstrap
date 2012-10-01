@@ -757,7 +757,7 @@
     this.options = options
     this.$element = $(element)
       .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
-    this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
+    //this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
   }
 
   Modal.prototype = {
@@ -817,8 +817,8 @@
         e && e.preventDefault();
 
         // Bail-out if multiple embeded modal dialogs are open and this hide() was not meant for us
-        // var parents = e && $(e.target).parents('.modal');
-        // if (parents && parents.length > 1 && parents[0] != this.$element[0]) return;
+        var parents = e && $(e.target).parents('.modal');
+        if (parents && parents.length > 1 && parents[0] != this.$element[0]) return;
 
         var that = this;
 
