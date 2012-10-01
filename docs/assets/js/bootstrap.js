@@ -759,7 +759,7 @@
     this.$element = $(element);
     this.$element = $(element)
       .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', function(e) { 
-          //if ($(e.target).parents('.modal')[0] == element)
+          if ($(e.target).parents('.modal')[0] == element)
             prox(e); 
       });
     this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
