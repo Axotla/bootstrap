@@ -750,6 +750,9 @@
  /* MODAL CLASS DEFINITION
   * ====================== */
 
+
+  var shownModals = [];
+
   var Modal = function (element, options) {
     this.options = options
     this.$element = $(element)
@@ -773,7 +776,10 @@
 
         if (this.isShown || e.isDefaultPrevented()) return
 
+
         $('body').addClass('modal-open')
+
+        shownModals.push(this);
 
         this.isShown = true
 
@@ -820,11 +826,15 @@
 
         this.isShown = false
 
-        $('body').removeClass('modal-open')
+        shownModals.splice(shownModals.indexOf(this), 1);
+
+
+        if (!shownModals.length)
+            $('body').removeClass('modal-open')
 
         this.escape()
 
-        $(document).off('focusin.modal')
+        if (!shownModals.length) $(document).off('focusin.modal')
 
         this.$element
           .removeClass('in')
@@ -960,7 +970,8 @@
     })
   })
 
-}(window.jQuery);/* ===========================================================
+}(window.jQuery);
+/* ===========================================================
  * bootstrap-tooltip.js v2.1.1
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame

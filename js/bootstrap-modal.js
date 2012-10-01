@@ -102,7 +102,7 @@
 
         this.isShown = false
 
-        delete shownModals[shownModals.indexOf(this)]
+        shownModals.splice(shownModals.indexOf(this), 1);
 
 
         if (!shownModals.length)
