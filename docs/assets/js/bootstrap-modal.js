@@ -35,8 +35,8 @@
     this.$element = $(element);
     this.$element = $(element)
       .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', function(e) { 
-          console.log(e.target);
-          if ($(e.target).parents('.modal')[0] == element) prox(e); 
+          //if ($(e.target).parents('.modal')[0] == element)
+            prox(e); 
       });
     this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
   }
