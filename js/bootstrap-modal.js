@@ -92,7 +92,9 @@
     , hide: function (e) {
         e && e.preventDefault();
 
-        if (e && $(e.target).parents('.modal')[0] != this.$element[0]) return;
+        // Bail-out if multiple embeded modal dialogs are open and this hide() was not meant for us
+        var parents = e && $(e.target).parents('.modal');
+        if (parents && parents.length > 1 && parents[0] != this.$element[0]) return;
 
         var that = this;
 
